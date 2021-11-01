@@ -20,10 +20,10 @@ from mpesa.urls import mpesa_urls
 from django.conf.urls.static import static
 from django.conf import settings
 
-from LaCasa.settings import MEDIA_ROOT, MEDIA_URL
+from settings import MEDIA_ROOT, MEDIA_URL
 urlpatterns = [
     path('',include('LaCasaDelLiqour.urls')),
-    path('mpesa/', include("mpesa_urls")),
+    path('mpesa/', include('mpesa_urls')),
     path('admin/', admin.site.urls),   
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
