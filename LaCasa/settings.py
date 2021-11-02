@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mpesa',
-    'LaCasaDelLiqour',
-    'crispy_forms'
+    'LaCasaDelLiqour',   
 ]
 
 MIDDLEWARE = [
@@ -139,8 +138,6 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = 'index'
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]
 
