@@ -13,34 +13,45 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.ico' %}">
     <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+    <script>
+      var user = '{{request.user}}'
+        function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+        }
+      }
+    }
+      return cookieValue;
+   }
+    const csrftoken = getToken('csrftoken');
+
+    </script>
     <title>LA CASA DEL LIQUOR</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'index' %}"><span>LA CASA DEL LIQUOR</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'index' %}">index<span class="sr-only">(current)</span></a>
-            </li>
-       
-          </ul>
-          <div class="form-inline my-2 my-lg-0">
-               <a href="#"class="btn btn-warning">Login</a>
-               
-               <a href="{% url 'cart' %}">
-                  <img  id="cart-icon" src="{% static 'images/carts.png' %}">
-              </a>
-              <p id="cart-total">0</p>
-      
-          </div>
-        </div>
-      </nav>
-    <div class="container">
+  <nav>
+    <img src="{% static 'images/LCL.jpg' %}" class="nav-bar" alt="...">
+    <div class="nav-links">
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li> 
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Signup</a></li>  
+        </ul>
+    </div>
+    <div class="form-inline my-2 my-lg-0">
+        <a href="{% url 'cart' %}">
+           <img  id="cart-icon" src="{% static 'images/carts.png' %}">
+       </a>
+       <p id="cart-total">0</p>
+   </div>
+</nav>
         {% block content %}
 
         {% endblock %}
@@ -48,35 +59,37 @@
     <!-- JavaScript Bundle with Popper -->
 <script 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous">
+</script>
+<script type="text/javascript"  src="{% static 'js/cart.js' %}" >  </script>
 
-    function getCookie(name){
-//split cookie string and get all individal name=value pairs in an array
-      var cookieArr = document.cookie.split(";");
-      //lloop through the array element
 
-      for(var i = 0; i< cookieArr.length; i++){
-        var cookiePair = cookieArr[i].split("=");
-        /* removing the whitespace at the beginning of the cookie name and comapre
-      it with the given string*/
-
-        if (name == cookiePair[0].trim()){
-          //decode the cookie value and return 
-          return decodeURIComponent(cookiePair[i]);
+<script>
+  function getCookie(name){
+  //split cookie string and get all individal name=value pairs in an array
+        var cookieArr = document.cookie.split(";");
+        //lloop through the array element
+  
+        for(var i = 0; i< cookieArr.length; i++){
+          var cookiePair = cookieArr[i].split("=");
+          /* removing the whitespace at the beginning of the cookie name and comapre
+        it with the given string*/
+  
+          if (name == cookiePair[0].trim()){
+            //decode the cookie value and return 
+            return decodeURIComponent(cookiePair[i]);
+          }
         }
+        //return null if not found
+        return null;
       }
-      //return null if not found
-      return null;
-    }
-    var cart = JSON.parse(getCookie('cart'))
-
-    if(cart == undefined){
-      cart ={}
-      console.log('cart was created')
-      document.cookie = 'cart'+ JSON.stringify(cart) + ";domain=;path/"
-    }
-    console.log('Cart:',cart)
-
-
+      var cart = JSON.parse(getCookie('cart'))
+  
+      if(cart == undefined){
+        cart ={}
+        console.log('cart was created')
+        document.cookie = 'cart'+ JSON.stringify(cart) + ";domain=;path/"
+      }
+      console.log('Cart:',cart)
 
 </script>
 </body>
