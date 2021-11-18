@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mpesa',
-    'LaCasaDelLiqour',   
+    'LaCasaDelLiqour',
+    
+    
+
+
 ]
 
 MIDDLEWARE = [
@@ -160,3 +164,13 @@ MPESA_CONFIG = {
     'SAFARICOM_API': 'https://sandbox.safaricom.co.ke',
     'SHORT_CODE': '174379',
 }
+
+#email services with gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'youruseremail@gmail.com'
+EMAIL_HOST_PASSWORD = 'key'#password to the email.
+EMAIL_PORT = 587
+EMAIL_USER_TLS = True
+DEFAULT_FROM_EMAIL = 'default from email'
+

@@ -1,15 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 import mpesa
 from django.http import JsonResponse
 import json
-
+from django.contrib.auth import authenticate,login,logout
 from .models import *
-
+from django.contrib import messages
+from .forms import ShippingAddressForm
 # Create your views here.
 
 def index(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer,complete=False)
+        items = order.orderitem_set.all()
+        cartItem = order.get_cart_items
+    else:
+        items = []
+        order = {"get_cart_items":0,"get_cart_total":0}
+        cartItem = Order['get_cart_items']
+    
     products = Products.objects.all()[:10]
-    context = {"products":products}
+    context = {"items":items,"order":order,"products":products,"cartItem":cartItem}
     return render(request,"index.html",context)
 
 def cart(request):
@@ -17,22 +28,36 @@ def cart(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer,complete=False)
         items = order.orderitem_set.all()
+        cartItem = Order.get_cart_items
     else:
         items = []
+        cartItem = Order['get_cart_items']
         order = {"get_cart_items":0,"get_cart_total":0}
-    context = {"items":items,"order":order}
+    context = {"items":items,"order":order,"cartItem":cartItem}
     return render(request,"cart.html",context)
-
+"""
+    this is the checkout view
+"""
 def checkout(request):
     if request.user.is_authenticated:
+        forms = ShippingAddressForm()
+        if request.method == "POST":
+            forms = ShippingAddressForm(request.POST)
+            if forms.is_valid():
+                forms.save()
+        else:
+            forms = ShippingAddressForm()
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer,complete=False)
         items = order.orderitem_set.all()
+        cartItem = Order.get_cart_items
     else:
         items = []
+        cartItem = Order['get_cart_items']
         order = {"get_cart_items":0,"get_cart_total":0}
-    context = {"items":items,"order":order}
+    context = {"items":items,"order":order,"cartItem":cartItem,"forms":forms}
     return render(request,"checkout.html",context)
+
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -44,24 +69,85 @@ def updateItem(request):
     customer = request.user.customer
     product = Products.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer,complete=False)
-
     orderItem, created = OrderItem.objects.get_or_create(order=order,product=product)
 
     if action == "add":
-        orderItem.qty = (orderItem.qty + 1)
+        orderItem.quantity = (orderItem.quantity + 1)
     elif action == "remove":
-        orderItem.qty = (orderItem.qty - 1)
+        orderItem.quantity = (orderItem.quantity - 1)
         orderItem.save()
         
-    if orderItem.qty <= 0:
+    if orderItem.quantity <= 0:
         orderItem.delete()
-
-
     return JsonResponse('Item was added',safe=False)
 
+
+
+
+
+
+
+
+
+#authentication functions
+
 def Login(request):
+    if request.method == "POST":
+        UserName = request.POST['Uname']
+        password1 = request.POST['Password1']
+        user = authenticate(request,username=UserName,password=password1)
+        if user is not None:
+            login(request,user)
+            return redirect("/")
+        else:
+            messages.info(request,"invalid user try again or sign-up")
+            return redirect("login") 
     return render(request,"login.html")
 
-def signup(request):
-    return render(request,"signup.html")
 
+
+def signup(request):
+    if request.method == "POST":
+        FirstName = request.POST['Fname']
+        LastName = request.POST['Lname']
+        UserName = request.POST['Uname']
+        Email = request.POST['email']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        if password1 == password2:
+            if User.objects.filter(username=UserName).exists():
+                messages.info(request,"username already exist, try another username")
+            elif User.objects.filter(email=Email).exists():
+                messages.info(request,"email already in use")
+            else:
+                user=User.objects.create(username=UserName,email=Email,password=password1,first_name=FirstName,last_name=LastName)
+                user.save();
+                messages.success(request,"Congratualation! Your accout has been created succesfully")
+                return redirect("login")
+                
+        else:
+            messages.info(request,"incorrect password")
+            
+    else:
+        return render(request,"signup.html")
+#generating automating login email.
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+
+def succes(request):
+    template = render_to_string("email_resp.html",{"fname":request.user.customer.first_name})
+    email = EmailMessage(
+        'Welcom new customer',
+        'template',
+        settings.EMAIl_HOST_USER,
+        ['request.user.customer.email']#the email of receivers.
+    )
+    email.fail_silently = False
+    email.send()
+
+#logout
+def Logout(request):
+    logout(request)
+    return render(request,"logout.html")
