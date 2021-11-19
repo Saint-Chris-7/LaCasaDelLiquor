@@ -9,26 +9,556 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.ico">
     <link rel="manifest" href="../static/images/site.webmanifest">
-    <link rel="stylesheet" href="index.css">
+    <!--css main page-->
+    <link rel="stylesheet" href="../static/css/index.css">
+    <!--light slider css-->
+    <link rel="stylesheet" href="../static/css/lightslider.css">
+    <!--jqwery file-->
+    <script src="../static/js/jQuery.js"></script>
+    <!--light slider s-->
+    <script src="../static/js/lightslider.js"></script>
+    <!--full slider call-->
+    <script>       
+        $(document).ready(function() {
+            $('#adaptive').lightSlider({
+            adaptiveHeight:true,
+            auto:true,
+            item:1,
+            slideMargin:0,
+            loop:true
+        });
+    });
+       </script>
+       <script>
+            /*--For-Product-SLider----------------*/
+    $(document).ready(function() {
+    $('#autoWidth').lightSlider({
+        autoWidth:true,
+        loop:true,
+        onSliderLoad: function() {
+            $('#autoWidth').removeClass('cS-hidden');
+        } 
+    });  
+});
+   
+       </script>
     <title>LACASADELLiquor</title>
     <!---using fontawesome for icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
 </head>
 <body>
     <!--navigation-->
     <nav>
         <!--social links and phone numbers-->
-        <div class="social-call">
+        <div class="social-calls">
             <!--social-calls-->
             <div class="social">
-                <a href="#"></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
 
             </div>
             <!--phon numbers-->
+            <div class="phone">
+                <span>Call +254 776082635</span>
+            </div>
+        </div>
+        <!---menu bar-->
+        <div class="navigation">
+            <!--logo-->
+            <a href="#">
+                <img src="../static/images/android-chrome-192x192.png" alt="logo">
+            </a>
+            <div class="toggle">
+
+            </div>
+            <!--menu-->
+            <ul class="menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Whiskey</a></li>
+                <li><a href="#">Wine</a>
+                <!--sales-label-->
+                <span class="sale-label">sale</span>
+                </li>
+                <li><a href="#">Cocktals</a></li>
+                <li><a href="#">Vodka</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <div class="right-menu">
+                <!--search-->
+                <a href="#" class="search"><i class="fas fa-search"></i></a>
+                 <!--user-->
+                 <a href=""><i class="far fa-user"></i></a>
+                 <!--shopping cart-->
+                 <a href=""><i class="fas fa-shopping-cart">
+                 <!--number of product in the cart-->
+                 <span class="num-cart-product">0</span>
+                </i>
+
+                </a>
+                
+            </div>
         </div>
 
     </nav>
+    <!--search region-->
+    <div class="search-bar">
+        <!--search inpur-->
+        <div class="search-input">
+            <!--input-->
+            <input type="search" name="search" id="" placeholder="search for brand and category">
+            <!--search canel-->
+            <a href="#" class="search-cancel"><i class="fas fa-times"></i></a>
+        </div>
+    </div>
+    <!---full slider-------------->
+    <ul id="adaptive" class="cs-hidden">
+        <!--box 1-->
+        <li class="item-a">
+            <!--box-->
+            <div class="full-slider-box f-slider-1">
+                <!--full slider text ---->
+                <div class="slider-text-container">
+                    <div class="f-slider-text">
+                        <span>limited offer</span>
+                        <strong>30% <br> off with <font>promo code</font> </strong>
+                        <a href="#" class="f-slider-btn">shop now</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <!--box 2-->
+            <div class="full-slider-box f-slider-2">
+                <!--full slider text -->
+                <div class="slider-text-container">
+                    <div class="f-slider-text">
+                        <span>limited offer</span>
+                        <strong>30% <br> off with <font>promo code</font> </strong>
+                        <a href="#" class="f-slider-btn">shop now</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <!--box 3-->
+            <div class="full-slider-box f-slider-3">
+                <!--full slider text -->
+                <div class="slider-text-container">
+                    <div class="f-slider-text">
+                        <span>limited offer</span>
+                        <strong>30% <br> off with <font>promo code</font> </strong>
+                        <a href="#" class="f-slider-btn">shop now</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+<!-----------featured category--------->
+<div class="feature-heading">
+    <h2>featured category</h2>
+</div>
+
+
+
+
+ <!--product-categories-slider---------------------->
+ <ul id="autoWidth" class="container" class="cs-hidden">
+    <!--box-1--------------------->
+    <li class="item">
+        <div class="feature-box">
+            <a href="#">
+                <img src="../static/images/george-bakos-W4o8Mhol5Ho-unsplash.jpg">
+            </a>
+        </div>
+        <span>Guiness</span>
+    </li>
+    <!--box-2--------------------->
+    <li class="item">
+        <div class="feature-box">
+            <a href="#">
+                <img src="../static/images/ridham-nagralawala-4xgzZQQpSBM-unsplash.jpg">
+            </a>
+        </div>
+        <span>Glenfiddich</span>
+    </li>
+    <!--box-3--------------------->
+    <li class="item">
+        <div class="feature-box">
+            <a href="#">
+                <img src="../static/images/eiliv-sonas-aceron-qO2m4HPfXLc-unsplash.jpg">
+            </a>
+        </div>
+        <span>Red label</span>
+    </li>
+    <!--box-4--------------------->
+    <li class="item">
+        <div class="feature-box">
+            <a href="#">
+                <img src="../static/images/smirnoff.jpg">
+            </a>
+        </div>
+        <span>Smirnoff</span>
+    </li>
+    <!--box-5--------------------->
+    <li class="item">
+        <div class="feature-box">
+            <a href="#">
+                <img src="../static/images/jack daniels.jpg">
+            </a>
+        </div>
+        <span>Jack Daniels</span>
+    </li>
+    <!--box-6--------------------->
+    <li class="item">
+        <div class="feature-box">
+            <a href="#">
+                <img src="../static/images/old monk.jpg">
+            </a>
+        </div>
+        <span>Old monk</span>
+    </li>
     
+  </ul>
+
+
+<!--django loop here-->
+ <!--NEW ARRIVAL-------------------------------->
+ <section class="new-arrival">
+            
+    <!--heading-------->
+    <div class="arrival-heading">
+        <strong>New Arrival</strong>
+        <p>We Provide And Deliver To Your Door Step</p>
+    </div>
+      <!--products----------------------->
+      <div class="product-container">
+          
+        <!--product-box-1---------->
+          <div class="product-box">
+              <!--product-img------------>
+              <div class="product-img">
+                  <!--add-cart---->
+                  <a href="#" class="add-cart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </a>
+                  <!--img------>
+                <img src="images/p-1.png">
+              </div>
+              <!--product-details-------->
+              <div class="product-details">
+                  <a href="#" class="p-name">Drawstring T-Shirt</a>
+                  <span class="p-price">$22.00</span>
+              </div>
+          </div>
+            <!--product-box-2---------->
+            <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                  <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                  <!--img------>
+                  <img src="images/p-2.png">
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+          <!--product-box-3---------->
+          <div class="product-box">
+            <!--product-img------------>
+            <div class="product-img">
+                <!--add-cart---->
+                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                <!--img------>
+              <img src="images/p-3.png">
+            </div>
+            <!--product-details-------->
+            <div class="product-details">
+                <a href="#" class="p-name">Drawstring T-Shirt</a>
+                <span class="p-price">$22.00</span>
+            </div>
+        </div>
+          <!--product-box-4---------->
+          <div class="product-box">
+            <!--product-img------------>
+            <div class="product-img">
+                <!--add-cart---->
+                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                <!--img------>
+              <img src="images/p-4.png">
+            </div>
+            <!--product-details-------->
+            <div class="product-details">
+                <a href="#" class="p-name">Drawstring T-Shirt</a>
+                <span class="p-price">$22.00</span>
+            </div>
+        </div>
+          <!--product-box-5---------->
+          <div class="product-box">
+            <!--product-img------------>
+            <div class="product-img">
+                <!--add-cart---->
+                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                <!--img------>
+              <img src="images/p-5.png">
+            </div>
+            <!--product-details-------->
+            <div class="product-details">
+                <a href="#" class="p-name">Drawstring T-Shirt</a>
+                <span class="p-price">$22.00</span>
+            </div>
+        </div>
+          <!--product-box-6---------->
+          <div class="product-box">
+            <!--product-img------------>
+            <div class="product-img">
+                <!--add-cart---->
+                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                <!--img------>
+              <img src="images/p-6.png">
+            </div>
+            <!--product-details-------->
+            <div class="product-details">
+                <a href="#" class="p-name">Drawstring T-Shirt</a>
+                <span class="p-price">$22.00</span>
+            </div>
+        </div>
+          <!--product-box-7---------->
+          <div class="product-box">
+            <!--product-img------------>
+            <div class="product-img">
+                <!--add-cart---->
+                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                <!--img------>
+              <img src="images/p-7.png">
+            </div>
+            <!--product-details-------->
+            <div class="product-details">
+                <a href="#" class="p-name">Drawstring T-Shirt</a>
+                <span class="p-price">$22.00</span>
+            </div>
+        </div>
+          <!--product-box-8---------->
+          <div class="product-box">
+            <!--product-img------------>
+            <div class="product-img">
+                <!--add-cart---->
+                <a href="#" class="add-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <!--img------>
+              <img src="images/p-8.png">
+            </div>
+            <!--product-details-------->
+            <div class="product-details">
+                <a href="#" class="p-name">Drawstring T-Shirt</a>
+                <span class="p-price">$22.00</span>
+            </div>
+        </div>
+      </div>
+  </section>
+
+  <!--Feature-items--------this is the django all eatured items------------------------>
+  <section class="feature-item">
+            
+    <!--heading-------->
+    <div class="feature-heading">
+    <strong>Featured Items</strong>
+    <p>We Provide You With Popular liquor brands and Cocktails</p>
+        </div>
+      <!--products----------------------->
+      <div class="product-container">
+          
+        <!--product-box-1---------->
+          <div class="product-box">
+              <!--product-img------------>
+              <div class="product-img">
+                  <!--add-cart---->
+                  <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                  <!--img------>
+                <img src="images/p-1.png">
+              </div>
+              <!--product-details-------->
+              <div class="product-details">
+                  <a href="#" class="p-name">Drawstring T-Shirt</a>
+                  <span class="p-price">$22.00</span>
+              </div>
+          </div>
+            <!--product-box-2---------->
+            <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                  <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                  <!--img------>
+                  <img src="images/p-2.png">
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+          <!--product-box-3---------->
+          <div class="product-box">
+            <!--product-img------------>
+            <div class="product-img">
+                <!--add-cart---->
+                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                <!--img------>
+              <img src="images/p-3.png">
+            </div>
+            <!--product-details-------->
+            <div class="product-details">
+                <a href="#" class="p-name">Drawstring T-Shirt</a>
+                <span class="p-price">$22.00</span>
+            </div>
+        </div>
+         <!--product-box-4---------->
+         <div class="product-box">
+            <!--product-img------------>
+            <div class="product-img">
+                <!--add-cart---->
+                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                <!--img------>
+              <img src="images/p-4.png">
+            </div>
+            <!--product-details-------->
+            <div class="product-details">
+                <a href="#" class="p-name">Drawstring T-Shirt</a>
+                <span class="p-price">$22.00</span>
+            </div>
+        </div>
+          
+            </div>
+            </section>
+
+
+ 
+
+
+
+
+
+    
+   <!--services------------------------->
+   <section class="services">
+    <!--services-box---------->
+    <div class="services-box">
+        <i class="fas fa-shipping-fast"></i>
+        <span>Free Shipping</span>
+        <p>Free Shipping for all US order</p>
+    </div>
+    <!--services-box---------->
+    <div class="services-box">
+        <i class="fas fa-headphones-alt"></i>
+        <span>Support 24/7</span>
+        <p>We support 24h a day</p>
+    </div>
+    <!--services-box---------->
+    <div class="services-box">
+        <i class="fas fa-sync"></i>
+        <span>100% Money Back</span>
+        <p>You have 30 days to Return</p>
+    </div>
+    
+</section>
+<!--footer---------------------------->
+<footer>
+    <!--copyright-------------->
+    <span class="copyright">
+        Copyright 2020 - LACASADELLIQUOR
+    </span>
+    <!--subcribe---------------->
+    <div class="subscribe">
+        <form>
+        <input type="email" placeholder="Example@gmail.com" required/>
+        <input type="submit" value="Subscribe">
+        </form>
+    </div>
+</footer>
+  
+
+
+
+
+
+    <script>
+
+        /* for the search bar*/
+        $(document).on('click','.search',function(){
+            $('.search-bar').addClass('search-bar-active')
+        });
+        $(document).on('click','.search-cancel',function(){
+            $('.search-bar').removeClass('search-bar-active')
+        });
+        </script>
+       <script>
+
+        /*full script slider*/
+    $(document).ready(function() {
+        $('#adaptive').lightSlider({
+        adaptiveHeight:true,
+        item:1,
+        slideMargin:0,
+        loop:true
+    });
+});
+    /*--For-Product-SLider----------------*/
+    $(document).ready(function() {
+    $('#autoWidth').lightSlider({
+        autoWidth:true,
+        loop:true,
+        onSliderLoad: function() {
+            $('#autoWidth').removeClass('cS-hidden');
+        } 
+    });  
+});
+    
+
+    </script>
+
+        <script type="text/javascript">
+  $(document).ready(function() {
+    var slider = $("#lightSlider").lightSlider();
+    slider.goToSlide();
+    slider.goToPrevSlide();
+    slider.goToNextSlide();
+    slider.getCurrentSlideCount();
+    slider.refresh();
+    slider.play(); 
+    slider.pause();    
+  });
+
+    </script>
+    <script>
+         /*--For-make-Menu-responsive------------*/
+  $(document).ready(function(){
+		$('.toggle').click(function(){
+			$('.toggle').toggleClass('active')
+			$('.navigation').toggleClass('active')
+		})
+	});
+  
+    </script>
+    <script>
+        /* for menu when scrolling*/
+        $(window).scroll(function(){
+            if($(document).scrollTop() > 50){
+                $('.navigation').addClass('fix-nav');
+            }
+            else{
+                $('.navigation').removeClass('fix-nav');
+
+            }
+        })
+    </script>
 </body>
 </html>

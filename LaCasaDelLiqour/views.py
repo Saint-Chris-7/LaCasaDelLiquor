@@ -9,18 +9,11 @@ from .forms import ShippingAddressForm
 # Create your views here.
 
 def index(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer,complete=False)
-        items = order.orderitem_set.all()
-        cartItem = order.get_cart_items
-    else:
-        items = []
-        order = {"get_cart_items":0,"get_cart_total":0}
-        cartItem = Order['get_cart_items']
-    
     products = Products.objects.all()[:10]
-    context = {"items":items,"order":order,"products":products,"cartItem":cartItem}
+    item_name = request.GET.get("search")
+    if item_name != '' and item_name is not None:
+        item_name = Products.objects.filter(name_icontains=item_name)
+    context = {"products":products}
     return render(request,"index.html",context)
 
 def cart(request):
