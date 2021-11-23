@@ -41,10 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mpesa',
     'LaCasaDelLiqour',
-    
-    
-
-
 ]
 
 MIDDLEWARE = [

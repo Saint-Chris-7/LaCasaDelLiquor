@@ -43,7 +43,7 @@ class Customer(models.Model):
     
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.user}"
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.SET_NULL,blank=True,null=True)

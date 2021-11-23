@@ -15,13 +15,13 @@
 </head>
 <body>
     <div class="loginbox">
-        <img src="{% static 'images/LCL.jpg' %}" class="logo" alt="logo">
+        <img src="{% static 'images/user icon.png' %}" alt="user-icon" class="logo">
          <h1>login here</h1>
-        {% csrf_token %}
         {% for messages in messages %}
         <h1>{{messages}}</h1>
        {% endfor %}
         <form action="." method="post">
+            {% csrf_token %}
             <p>User name</p>
             <input type="text" name="Uname" placeholder="Enter username">
             <p>Password</p>

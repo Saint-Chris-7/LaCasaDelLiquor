@@ -9,11 +9,18 @@ from .forms import ShippingAddressForm
 # Create your views here.
 
 def index(request):
-    products = Products.objects.all()[:10]
+    wines = Products.objects.filter(category="Wine")
+    whiskeys = Products.objects.filter(category="Whiskey")
+    rums = Products.objects.filter(category="Rum")
+    vodkas = Products.objects.filter(category="Vodka")
+    gins = Products.objects.filter(category="Gin")
+    beers = Products.objects.filter(category="Beer")
+    Product = [items for items in Products.objects.all()] 
+    
     item_name = request.GET.get("search")
     if item_name != '' and item_name is not None:
         item_name = Products.objects.filter(name_icontains=item_name)
-    context = {"products":products}
+    context = {"wines":wines,"whiskeys":whiskeys,"rums":rums,"vodkas":vodkas,"gines":gins,"beers":beers,"item_name":item_name,"Product":Product}
     return render(request,"index.html",context)
 
 def cart(request):
@@ -91,12 +98,17 @@ def Login(request):
         user = authenticate(request,username=UserName,password=password1)
         if user is not None:
             login(request,user)
+            messages.info(request,"welcome {}".format(user.get_username()))
             return redirect("/")
         else:
             messages.info(request,"invalid user try again or sign-up")
             return redirect("login") 
     return render(request,"login.html")
 
+#logout
+def Logout(request):
+    logout(request)
+    return render(request,"logout.html")
 
 
 def signup(request):
@@ -104,17 +116,17 @@ def signup(request):
         FirstName = request.POST['Fname']
         LastName = request.POST['Lname']
         UserName = request.POST['Uname']
-        Email = request.POST['email']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
+        Email = request.POST['Email']
+        Password1 = request.POST['Password1']
+        Password2 = request.POST['Password2']
 
-        if password1 == password2:
+        if Password1 == Password2:
             if User.objects.filter(username=UserName).exists():
                 messages.info(request,"username already exist, try another username")
             elif User.objects.filter(email=Email).exists():
                 messages.info(request,"email already in use")
             else:
-                user=User.objects.create(username=UserName,email=Email,password=password1,first_name=FirstName,last_name=LastName)
+                user=User.objects.create(username=UserName,email=Email,password=Password1,first_name=FirstName,last_name=LastName)
                 user.save();
                 messages.success(request,"Congratualation! Your accout has been created succesfully")
                 return redirect("login")
@@ -124,6 +136,9 @@ def signup(request):
             
     else:
         return render(request,"signup.html")
+
+
+
 #generating automating login email.
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -132,7 +147,7 @@ from django.template.loader import render_to_string
 def succes(request):
     template = render_to_string("email_resp.html",{"fname":request.user.customer.first_name})
     email = EmailMessage(
-        'Welcom new customer',
+        'Welcome new customer',
         'template',
         settings.EMAIl_HOST_USER,
         ['request.user.customer.email']#the email of receivers.
@@ -140,7 +155,4 @@ def succes(request):
     email.fail_silently = False
     email.send()
 
-#logout
-def Logout(request):
-    logout(request)
-    return render(request,"logout.html")
+

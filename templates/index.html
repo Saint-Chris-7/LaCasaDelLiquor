@@ -1,22 +1,23 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.ico">
-    <link rel="manifest" href="../static/images/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/apple-touch-icon.png' %}' ">
+    <link rel="icon" type="image/png" sizes="16x16" href=".{% static 'images/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.ico' %}">
+    <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
     <!--css main page-->
-    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <!--light slider css-->
-    <link rel="stylesheet" href="../static/css/lightslider.css">
+    <link rel="stylesheet" href="{% static 'css/lightslider.css' %}">
     <!--jqwery file-->
-    <script src="../static/js/jQuery.js"></script>
+    <script src="{% static 'js/jQuery.js' %}"></script>
     <!--light slider s-->
-    <script src="../static/js/lightslider.js"></script>
+    <script src="{% static 'js/lightslider.js' %}"></script>
     <!--full slider call-->
     <script>       
         $(document).ready(function() {
@@ -63,14 +64,14 @@
             </div>
             <!--phon numbers-->
             <div class="phone">
-                <span>Call +254 776082635</span>
+                <span>Call +254 786458455</span>
             </div>
         </div>
         <!---menu bar-->
         <div class="navigation">
             <!--logo-->
             <a href="#">
-                <img src="../static/images/android-chrome-192x192.png" alt="logo">
+                <img src="{% static 'images/android-chrome-192x192.png' %}" alt="logo">
             </a>
             <div class="toggle">
 
@@ -92,9 +93,13 @@
                 <!--search-->
                 <a href="#" class="search"><i class="fas fa-search"></i></a>
                  <!--user-->
-                 <a href=""><i class="far fa-user"></i></a>
+                 <a href="{% url 'signup' %}"><i class="far fa-user"></i></a>
+                 <!--login-->
+                 <a href="{% url 'login' %}"><i class="fas fa-sign-in"></i></a>
+                 <!--logut-->
+                 <a href="{% url 'logout' %}"><i class="fas fa-sign-out"></i></a>
                  <!--shopping cart-->
-                 <a href=""><i class="fas fa-shopping-cart">
+                 <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart">
                  <!--number of product in the cart-->
                  <span class="num-cart-product">0</span>
                 </i>
@@ -163,43 +168,40 @@
     <h2>featured category</h2>
 </div>
 
-
-
-
  <!--product-categories-slider---------------------->
  <ul id="autoWidth" class="container" class="cs-hidden">
     <!--box-1--------------------->
     <li class="item">
         <div class="feature-box">
             <a href="#">
-                <img src="../static/images/george-bakos-W4o8Mhol5Ho-unsplash.jpg">
+                <img src="{% static 'images/george-bakos-W4o8Mhol5Ho-unsplash.jpg' %}">
             </a>
         </div>
-        <span>Guiness</span>
+        <span>Whiskey</span>
     </li>
     <!--box-2--------------------->
     <li class="item">
         <div class="feature-box">
             <a href="#">
-                <img src="../static/images/ridham-nagralawala-4xgzZQQpSBM-unsplash.jpg">
+                <img src="{% static 'images/ridham-nagralawala-4xgzZQQpSBM-unsplash.jpg' %}">
             </a>
         </div>
-        <span>Glenfiddich</span>
+        <span>Beer</span>
     </li>
     <!--box-3--------------------->
     <li class="item">
         <div class="feature-box">
             <a href="#">
-                <img src="../static/images/eiliv-sonas-aceron-qO2m4HPfXLc-unsplash.jpg">
+                <img src="{% static 'images/eiliv-sonas-aceron-qO2m4HPfXLc-unsplash.jpg' %}">
             </a>
         </div>
-        <span>Red label</span>
+        <span>Wine</span>
     </li>
     <!--box-4--------------------->
     <li class="item">
         <div class="feature-box">
             <a href="#">
-                <img src="../static/images/smirnoff.jpg">
+                <img src="{% static 'images/smirnoff.jpg' %}">
             </a>
         </div>
         <span>Smirnoff</span>
@@ -208,19 +210,19 @@
     <li class="item">
         <div class="feature-box">
             <a href="#">
-                <img src="../static/images/jack daniels.jpg">
+                <img src="{% static 'images/jack daniels.jpg' %}">
             </a>
         </div>
-        <span>Jack Daniels</span>
+        <span>Vodka</span>
     </li>
     <!--box-6--------------------->
     <li class="item">
         <div class="feature-box">
             <a href="#">
-                <img src="../static/images/old monk.jpg">
+                <img src="{% static 'images/old monk.jpg' %}">
             </a>
         </div>
-        <span>Old monk</span>
+        <span>Rum</span>
     </li>
     
   </ul>
@@ -229,10 +231,10 @@
 <!--django loop here-->
  <!--NEW ARRIVAL-------------------------------->
  <section class="new-arrival">
-            
+           
     <!--heading-------->
     <div class="arrival-heading">
-        <strong>New Arrival</strong>
+        <strong>Popular Drinks</strong>
         <p>We Provide And Deliver To Your Door Step</p>
     </div>
       <!--products----------------------->
@@ -247,12 +249,12 @@
                       <i class="fas fa-shopping-cart"></i>
                     </a>
                   <!--img------>
-                <img src="images/p-1.png">
+                <img src="{% static '{{Product.image.imageURL}}' %}">
               </div>
               <!--product-details-------->
               <div class="product-details">
-                  <a href="#" class="p-name">Drawstring T-Shirt</a>
-                  <span class="p-price">$22.00</span>
+                  <a href="#" class="p-name">{{Product.name}}</a>
+                  <span class="p-price">{{Prouct.price}}</span>
               </div>
           </div>
             <!--product-box-2---------->
@@ -266,8 +268,8 @@
                 </div>
                 <!--product-details-------->
                 <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
+                    <a href="#" class="p-name">product here</a>
+                    <span class="p-price">ksh 200</span>
                 </div>
             </div>
           <!--product-box-3---------->
@@ -281,8 +283,8 @@
             </div>
             <!--product-details-------->
             <div class="product-details">
-                <a href="#" class="p-name">Drawstring T-Shirt</a>
-                <span class="p-price">$22.00</span>
+                <a href="#" class="p-name">product here</a>
+                <span class="p-price">ksh 200</span>
             </div>
         </div>
           <!--product-box-4---------->
@@ -296,8 +298,8 @@
             </div>
             <!--product-details-------->
             <div class="product-details">
-                <a href="#" class="p-name">Drawstring T-Shirt</a>
-                <span class="p-price">$22.00</span>
+                <a href="#" class="p-name">product here</a>
+                <span class="p-price">ksh 200</span>
             </div>
         </div>
           <!--product-box-5---------->
@@ -311,8 +313,8 @@
             </div>
             <!--product-details-------->
             <div class="product-details">
-                <a href="#" class="p-name">Drawstring T-Shirt</a>
-                <span class="p-price">$22.00</span>
+                <a href="#" class="p-name">product here</a>
+                <span class="p-price">ksh 200</span>
             </div>
         </div>
           <!--product-box-6---------->
@@ -326,8 +328,8 @@
             </div>
             <!--product-details-------->
             <div class="product-details">
-                <a href="#" class="p-name">Drawstring T-Shirt</a>
-                <span class="p-price">$22.00</span>
+                <a href="#" class="p-name">product here</a>
+                <span class="p-price">ksh 200</span>
             </div>
         </div>
           <!--product-box-7---------->
@@ -341,8 +343,8 @@
             </div>
             <!--product-details-------->
             <div class="product-details">
-                <a href="#" class="p-name">Drawstring T-Shirt</a>
-                <span class="p-price">$22.00</span>
+                <a href="#" class="p-name">product here</a>
+                <span class="p-price">ksh 200</span>
             </div>
         </div>
           <!--product-box-8---------->
@@ -358,8 +360,8 @@
             </div>
             <!--product-details-------->
             <div class="product-details">
-                <a href="#" class="p-name">Drawstring T-Shirt</a>
-                <span class="p-price">$22.00</span>
+                <a href="#" class="p-name">product here</a>
+                <span class="p-price">ks here</span>
             </div>
         </div>
       </div>
@@ -368,9 +370,9 @@
   <!--Feature-items--------this is the django all eatured items------------------------>
   <section class="feature-item">
             
-    <!--heading-------->
+    <!--heading------wines-->
     <div class="feature-heading">
-    <strong>Featured Items</strong>
+    <strong>Wines</strong>
     <p>We Provide You With Popular liquor brands and Cocktails</p>
         </div>
       <!--products----------------------->
@@ -387,11 +389,11 @@
               </div>
               <!--product-details-------->
               <div class="product-details">
-                  <a href="#" class="p-name">Drawstring T-Shirt</a>
-                  <span class="p-price">$22.00</span>
+                  <a href="#" class="p-name">product here</a>
+                  <span class="p-price">ksh 200</span>
               </div>
           </div>
-            <!--product-box-2---------->
+            <!--product-box-2--and the----->
             <div class="product-box">
                 <!--product-img------------>
                 <div class="product-img">
@@ -402,8 +404,8 @@
                 </div>
                 <!--product-details-------->
                 <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
+                    <a href="#" class="p-name">product here</a>
+                    <span class="p-price">ksh 200</span>
                 </div>
             </div>
           <!--product-box-3---------->
@@ -417,8 +419,8 @@
             </div>
             <!--product-details-------->
             <div class="product-details">
-                <a href="#" class="p-name">Drawstring T-Shirt</a>
-                <span class="p-price">$22.00</span>
+                <a href="#" class="p-name">product here</a>
+                <span class="p-price">ksh 200</span>
             </div>
         </div>
          <!--product-box-4---------->
@@ -432,17 +434,14 @@
             </div>
             <!--product-details-------->
             <div class="product-details">
-                <a href="#" class="p-name">Drawstring T-Shirt</a>
-                <span class="p-price">$22.00</span>
+                <a href="#" class="p-name">product here</a>
+                <span class="p-price">ksh 200</span>
             </div>
         </div>
-          
-            </div>
             </section>
 
 
  
-
 
 
 
