@@ -15,15 +15,43 @@ def index(request):
     vodkas = Products.objects.filter(category="Vodka")
     gins = Products.objects.filter(category="Gin")
     beers = Products.objects.filter(category="Beer")
-    Product = [items for items in Products.objects.all()] 
+    Product = Products.objects.all()
+    
     
     item_name = request.GET.get("search")
     if item_name != '' and item_name is not None:
         item_name = Products.objects.filter(name_icontains=item_name)
-    context = {"wines":wines,"whiskeys":whiskeys,"rums":rums,"vodkas":vodkas,"gines":gins,"beers":beers,"item_name":item_name,"Product":Product}
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer,complete=False)
+        items = order.orderitem_set.all()
+        cartItem = order.get_cart_items
+    else:
+        items = []
+        order = {"get_cart_items":0,"get_cart_total":0}
+        cartItem = order['get_cart_items']
+    
+    context = {"wines":wines,"whiskeys":whiskeys,"rums":rums,"vodkas":vodkas,"gines":gins,
+    "beers":beers,"item_name":item_name,"Product":Product,"items":items,"order":order,"cartItem":cartItem}
     return render(request,"index.html",context)
 
 def cart(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer,complete=False)
+        items = order.orderitem_set.all()
+        cartItem = order.get_cart_items
+    else:
+        items = []
+        order = {"get_cart_items":0,"get_cart_total":0}
+        cartItem = order['get_cart_items']
+    context = {"items":items,"order":order,"cartItem":cartItem}
+    return render(request,"cart.html",context)
+"""
+    this is the checkout view
+"""
+def checkout(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer,complete=False)
@@ -34,28 +62,6 @@ def cart(request):
         cartItem = Order['get_cart_items']
         order = {"get_cart_items":0,"get_cart_total":0}
     context = {"items":items,"order":order,"cartItem":cartItem}
-    return render(request,"cart.html",context)
-"""
-    this is the checkout view
-"""
-def checkout(request):
-    if request.user.is_authenticated:
-        forms = ShippingAddressForm()
-        if request.method == "POST":
-            forms = ShippingAddressForm(request.POST)
-            if forms.is_valid():
-                forms.save()
-        else:
-            forms = ShippingAddressForm()
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer,complete=False)
-        items = order.orderitem_set.all()
-        cartItem = Order.get_cart_items
-    else:
-        items = []
-        cartItem = Order['get_cart_items']
-        order = {"get_cart_items":0,"get_cart_total":0}
-    context = {"items":items,"order":order,"cartItem":cartItem,"forms":forms}
     return render(request,"checkout.html",context)
 
 def updateItem(request):
@@ -75,7 +81,7 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == "remove":
         orderItem.quantity = (orderItem.quantity - 1)
-        orderItem.save()
+    orderItem.save()
         
     if orderItem.quantity <= 0:
         orderItem.delete()

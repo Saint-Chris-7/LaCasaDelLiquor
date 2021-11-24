@@ -43,7 +43,25 @@
 });
    
        </script>
-    <title>LACASADELLiquor</title>
+    <script>
+    function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getToken('csrftoken');
+    </script>
+    <title>lacasdelliquor</title>
     <!---using fontawesome for icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -94,14 +112,10 @@
                 <a href="#" class="search"><i class="fas fa-search"></i></a>
                  <!--user-->
                  <a href="{% url 'signup' %}"><i class="far fa-user"></i></a>
-                 <!--login-->
-                 <a href="{% url 'login' %}"><i class="fas fa-sign-in"></i></a>
-                 <!--logut-->
-                 <a href="{% url 'logout' %}"><i class="fas fa-sign-out"></i></a>
                  <!--shopping cart-->
                  <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart">
                  <!--number of product in the cart-->
-                 <span class="num-cart-product">0</span>
+                 <span class="num-cart-product">{{cartItem}}</span>
                 </i>
 
                 </a>
@@ -228,217 +242,36 @@
   </ul>
 
 
-<!--django loop here-->
- <!--NEW ARRIVAL-------------------------------->
- <section class="new-arrival">
-           
-    <!--heading-------->
-    <div class="arrival-heading">
-        <strong>Popular Drinks</strong>
-        <p>We Provide And Deliver To Your Door Step</p>
-    </div>
+
+
+  <!--Feature-items--------this is the django all eatured items------------------------>
+  <section class="feature-item">      
+    <!--heading------wines-->
+    <!--<div class="feature-heading">
+    <strong>Featured Item</strong>
+    <p>We Provide You With Popular liquor brands and Cocktails</p>
+        </div>-->
       <!--products----------------------->
       <div class="product-container">
-          
         <!--product-box-1---------->
+        {% for Product in Product%}
           <div class="product-box">
               <!--product-img------------>
               <div class="product-img">
                   <!--add-cart---->
-                  <a href="#" class="add-cart">
-                      <i class="fas fa-shopping-cart"></i>
-                    </a>
+                  <button class="add-cart" data-product="{{Product.id}}" data-action="add" ><i class="fas fa-shopping-cart"></i></button>
                   <!--img------>
-                <img src="{% static '{{Product.image.imageURL}}' %}">
+                <img src="{{Product.image.url}}">
               </div>
               <!--product-details-------->
               <div class="product-details">
                   <a href="#" class="p-name">{{Product.name}}</a>
-                  <span class="p-price">{{Prouct.price}}</span>
+                  <span class="p-price">{{Product.price}}</span>
               </div>
           </div>
-            <!--product-box-2---------->
-            <div class="product-box">
-                <!--product-img------------>
-                <div class="product-img">
-                    <!--add-cart---->
-                  <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                  <!--img------>
-                  <img src="images/p-2.png">
-                </div>
-                <!--product-details-------->
-                <div class="product-details">
-                    <a href="#" class="p-name">product here</a>
-                    <span class="p-price">ksh 200</span>
-                </div>
-            </div>
-          <!--product-box-3---------->
-          <div class="product-box">
-            <!--product-img------------>
-            <div class="product-img">
-                <!--add-cart---->
-                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                <!--img------>
-              <img src="images/p-3.png">
-            </div>
-            <!--product-details-------->
-            <div class="product-details">
-                <a href="#" class="p-name">product here</a>
-                <span class="p-price">ksh 200</span>
-            </div>
-        </div>
-          <!--product-box-4---------->
-          <div class="product-box">
-            <!--product-img------------>
-            <div class="product-img">
-                <!--add-cart---->
-                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                <!--img------>
-              <img src="images/p-4.png">
-            </div>
-            <!--product-details-------->
-            <div class="product-details">
-                <a href="#" class="p-name">product here</a>
-                <span class="p-price">ksh 200</span>
-            </div>
-        </div>
-          <!--product-box-5---------->
-          <div class="product-box">
-            <!--product-img------------>
-            <div class="product-img">
-                <!--add-cart---->
-                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                <!--img------>
-              <img src="images/p-5.png">
-            </div>
-            <!--product-details-------->
-            <div class="product-details">
-                <a href="#" class="p-name">product here</a>
-                <span class="p-price">ksh 200</span>
-            </div>
-        </div>
-          <!--product-box-6---------->
-          <div class="product-box">
-            <!--product-img------------>
-            <div class="product-img">
-                <!--add-cart---->
-                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                <!--img------>
-              <img src="images/p-6.png">
-            </div>
-            <!--product-details-------->
-            <div class="product-details">
-                <a href="#" class="p-name">product here</a>
-                <span class="p-price">ksh 200</span>
-            </div>
-        </div>
-          <!--product-box-7---------->
-          <div class="product-box">
-            <!--product-img------------>
-            <div class="product-img">
-                <!--add-cart---->
-                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                <!--img------>
-              <img src="images/p-7.png">
-            </div>
-            <!--product-details-------->
-            <div class="product-details">
-                <a href="#" class="p-name">product here</a>
-                <span class="p-price">ksh 200</span>
-            </div>
-        </div>
-          <!--product-box-8---------->
-          <div class="product-box">
-            <!--product-img------------>
-            <div class="product-img">
-                <!--add-cart---->
-                <a href="#" class="add-cart">
-                    <i class="fas fa-shopping-cart"></i>
-                </a>
-                <!--img------>
-              <img src="images/p-8.png">
-            </div>
-            <!--product-details-------->
-            <div class="product-details">
-                <a href="#" class="p-name">product here</a>
-                <span class="p-price">ks here</span>
-            </div>
-        </div>
-      </div>
-  </section>
-
-  <!--Feature-items--------this is the django all eatured items------------------------>
-  <section class="feature-item">
-            
-    <!--heading------wines-->
-    <div class="feature-heading">
-    <strong>Wines</strong>
-    <p>We Provide You With Popular liquor brands and Cocktails</p>
-        </div>
-      <!--products----------------------->
-      <div class="product-container">
-          
-        <!--product-box-1---------->
-          <div class="product-box">
-              <!--product-img------------>
-              <div class="product-img">
-                  <!--add-cart---->
-                  <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                  <!--img------>
-                <img src="images/p-1.png">
-              </div>
-              <!--product-details-------->
-              <div class="product-details">
-                  <a href="#" class="p-name">product here</a>
-                  <span class="p-price">ksh 200</span>
-              </div>
-          </div>
-            <!--product-box-2--and the----->
-            <div class="product-box">
-                <!--product-img------------>
-                <div class="product-img">
-                    <!--add-cart---->
-                  <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                  <!--img------>
-                  <img src="images/p-2.png">
-                </div>
-                <!--product-details-------->
-                <div class="product-details">
-                    <a href="#" class="p-name">product here</a>
-                    <span class="p-price">ksh 200</span>
-                </div>
-            </div>
-          <!--product-box-3---------->
-          <div class="product-box">
-            <!--product-img------------>
-            <div class="product-img">
-                <!--add-cart---->
-                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                <!--img------>
-              <img src="images/p-3.png">
-            </div>
-            <!--product-details-------->
-            <div class="product-details">
-                <a href="#" class="p-name">product here</a>
-                <span class="p-price">ksh 200</span>
-            </div>
-        </div>
-         <!--product-box-4---------->
-         <div class="product-box">
-            <!--product-img------------>
-            <div class="product-img">
-                <!--add-cart---->
-                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                <!--img------>
-              <img src="images/p-4.png">
-            </div>
-            <!--product-details-------->
-            <div class="product-details">
-                <a href="#" class="p-name">product here</a>
-                <span class="p-price">ksh 200</span>
-            </div>
-        </div>
-            </section>
+          {% endfor %}
+      </div>  
+    </section>
 
 
  
@@ -558,6 +391,10 @@
 
             }
         })
+    </script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    <script>
+        var user = '{{request.user}}'
     </script>
 </body>
 </html>

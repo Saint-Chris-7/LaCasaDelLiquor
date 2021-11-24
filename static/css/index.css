@@ -250,6 +250,9 @@ nav{
 .f-slider-text strong font{
     color: aqua;
 }
+.feature-item{
+    display: flex;
+}
 .feature-heading{
     display: flex;
     justify-content: center;
@@ -295,6 +298,9 @@ nav{
     display: flex;
     justify-content: center !important;
     margin: 10px auto 40px auto;
+}
+.new-arrival{
+    display: none;
 }
 .arrival-heading{
     display: flex;
